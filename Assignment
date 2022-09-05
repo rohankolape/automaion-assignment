@@ -1,0 +1,95 @@
+package interviewtrial;
+
+
+import java.time.Duration;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class trial1
+{
+public static void main(String[] args) 
+{
+	//initialization of browser settings
+	System.setProperty("webdriver.chrome.driver","E:\\interviewtrialvesion\\chromedriver.exe");
+	WebDriver driver=new ChromeDriver();
+	//hitting url
+	driver.get("https://demoblaze.com/index.html");
+	driver.manage().window().maximize();
+	//login with given credentials
+	driver.findElement(By.xpath("//a[text()=\"Log in\"]")).click();
+	WebElement login=driver.findElement(By.xpath("//input[@id=\"loginusername\"]"));
+	if(login.isDisplayed()) {
+		login.sendKeys("sctqaautomation@grr.la");
+	}
+
+driver.findElement(By.xpath("//input[@id=\"loginusername\"]")).sendKeys("sctqaautomation@grr.la");
+	driver.findElement(By.xpath("//input[@id=\"loginpassword\"]")).sendKeys("Spring@123");
+	driver.findElement(By.xpath("//button[text()=\"Log in\"]")).click();
+	//add phone to cart
+	driver.findElement(By.xpath("//a[@id=\"itemc\"][text()=\"Phones\"]")).click();
+driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+//	WebDriverWait wait=new WebDriverWait (driver,10);
+	//driver.navigate().refresh();
+
+	driver.findElement(By.xpath("//a[@class=\"hrefch\"][text()=\"Samsung galaxy s6\"]")).click();
+	//driver.findElement(By.xpath("//a[@class=\"hrefch\"][text()=\"Samsung galaxy s6\"]")).click();
+	
+
+	driver.findElement(By.xpath("//a[text()=\"Add to cart\"]")).click();
+	driver.switchTo().alert().accept();
+	//again home
+	driver.findElement(By.xpath("//a[@href=\"index.html\"][@class=\"nav-link\"]")).click();
+	//add laptop to cart
+	driver.findElement(By.xpath("//a[text()=\"Laptops\"]")).click();
+	//scrolling
+	driver.findElement(By.xpath("//a[text()=\"Dell i7 8gb\"]")).click();
+	driver.findElement(By.xpath("//a[text()=\"Add to cart\"]")).click();
+	driver.switchTo().alert().accept();
+	
+	//add monitor to cart
+	driver.findElement(By.xpath("//a[@href=\"index.html\"][@class=\"nav-link\"]")).click();
+	//scrolling
+	driver.findElement(By.xpath("//a[text()=\"Monitors\"]")).click();
+	driver.findElement(By.xpath("//a[text()=\"ASUS Full HD\"]")).click();
+	driver.findElement(By.xpath("//a[text()=\"Add to cart\"]")).click();
+	driver.switchTo().alert().accept();
+	
+	//go to cart
+	driver.findElement(By.xpath("//a[text()=\"Cart\"]")).click();
+	
+	//sort the product by price
+	
+	//WebElement cell1=driver.findElement(By.xpath("//tr[1]//td[3]"));
+	//WebElement cell2=driver.findElement(By.xpath("//tr[2]//td[3]"));
+//	WebElement cell3=driver.findElement(By.xpath("//tr[3]//td[3]"));
+	////tr[3]//td[3]
+	for(int i=1;i<=3;i++)
+	{
+		WebElement price=driver.findElement(By.xpath("//tr[i]//td[3]"));
+		System.out.println(price.getText());
+	}
+
+	
+	
+	//place order
+	driver.findElement(By.xpath("//button[text()=\"Place Order\"]")).click();
+	
+	driver.findElement(By.xpath("//input[@id=\"name\"]")).sendKeys("ABCD");
+	driver.findElement(By.xpath("//input[@id=\"country\"]")).sendKeys("INDia");
+	driver.findElement(By.xpath("////input[@id=\"city\"]")).sendKeys("pune");
+	driver.findElement(By.xpath("//input[@id=\"card\"]")).sendKeys("1234");
+	driver.findElement(By.xpath("//input[@id=\"month\"]")).sendKeys("sept");
+	driver.findElement(By.xpath("//input[@id=\"year\"]")).sendKeys("2022");
+	driver.findElement(By.xpath("//button[text()=\"Purchase\"]")).click();
+	
+	driver.findElement(By.xpath("//button[text()=\"OK\"]")).click();
+	driver.switchTo().alert().getText();
+	driver.quit();
+}
+}
